@@ -51,7 +51,7 @@ selected_markets = st.multiselect(
   default=markets
 )
 
-filtered_market = market_channel[market_channel["Market"].isin(selected_markets)]
+filtered_market = market_channel_summary[market_channel_summary["Market"].isin(selected_markets)]
 
 fig = px.bar(
     filtered_market,
