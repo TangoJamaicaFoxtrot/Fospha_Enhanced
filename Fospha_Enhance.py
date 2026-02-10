@@ -74,7 +74,7 @@ def build_summary(df, groupby_col):
     return summary
 
 # Monthly summary
-monthly_summary = build_summary(df, ["Date_Year_Month"])
+monthly_summary = build_summary(filtered_df, ["Date_Year_Month"])
 # Market / Paid Channel Summary
 market_channel_summary = build_summary(filtered_df, ["Market", "Channel"])
 paid_channels = ["Paid Search - Generic", "Paid Shopping", "Paid Social", "Performance Max"]
