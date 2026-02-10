@@ -130,3 +130,14 @@ with tab2:
     )
     
     st.plotly_chart(fig2, use_container_width=True)
+
+with tab3:
+    st.subheader("Trend of Revenue over Time by Market")
+    revenue_market_trend_fig = px.line(
+        build_summary(filtered_df, ["Date_Year_Month", "Market"]).reset_index(),
+        x="Date_Year_Month",
+        y="Revenue",
+        color="Market"
+    )
+    st.plotly_chart(revenue_market_trend_fig, use_container_width=True)
+    
