@@ -74,7 +74,7 @@ fig = px.bar(
     y=selected_metric,
     color="Market",
     barmode="group",
-    title=(f"{selected_metric} by Channel for {selected_markets}")
+    title=(f"{selected_metric} by Channel and Market")
 )
 
 st.plotly_chart(fig, use_container_width=True)
