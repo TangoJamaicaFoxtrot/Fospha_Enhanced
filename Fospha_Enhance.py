@@ -89,7 +89,7 @@ with tab1:
     kpi1, kpi2, kpi3, kpi4 = st.columns(4)
     kpi1.metric("Total Cost (£)", f"{monthly_summary['Cost'].sum():,.0f}")
     kpi2.metric("Total Revenue (£)", f"{monthly_summary['Revenue'].sum():,.0f}")
-    kpi3.metric("ROAS", f"{monthly_summary['Revenue'].sum() / monthly_summary['ost'].sum():.2f}")
+    kpi3.metric("ROAS", f"{monthly_summary['Revenue'].sum() / monthly_summary['Cost'].sum():.2f}")
     kpi4.metric("CAC (£)", f"{monthly_summary['Cost'].sum() / monthly_summary['New Conversions'].sum():.2f}")
 
 
