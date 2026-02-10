@@ -59,9 +59,13 @@ def build_summary(df, groupby_col):
 # Market / Paid Channel Summary
 market_channel_summary = build_summary(filtered_df, ["Market", "Channel"])
 paid_channels = ["Paid Search - Generic", "Paid Shopping", "Paid Social", "Performance Max"]
+other_channels = ["Direct", "Display", "Email", "Organic Search", "Other", "Social", "Affiliates"]
 market_paid_channel_summary = market_channel_summary[market_channel_summary["Channel"].isin(paid_channels)]
+market_other_channel_summary = market_channel_summary[market_channel_summary["Channel"].isin(other_channels)]
 
-metrics = ["ROAS", "CAC", "CPP", "AOV", "Conversions", "New_Conversions", "Return_Conversions"]
+metrics = ["ROAS", "CAC", "CPP", "AOV", "Conversions", "New_Conversions", "Return_Conversions", "Revenue", "Cost", "Visitors"]
+other_metrics = ["Conversions", "New_Conversions", "Return_Conversions", "Revenue", "Cost", "Visitors"]
+
 selected_metric = st.selectbox(
     "Select Metric to Visualise",
     metrics,
