@@ -61,13 +61,22 @@ market_channel_summary = build_summary(filtered_df, ["Market", "Channel"])
 paid_channels = ["Paid Search - Generic", "Paid Shopping", "Paid Social", "Performance Max"]
 market_paid_channel_summary = market_channel_summary[market_channel_summary["Channel"].isin(paid_channels)]
 
+metrics = ["ROAS", "CAC", "CPP", "AOV", "Conversions", "New_Conversions", "Return_Conversions"]
+selected_metric = st.selectbox(
+    "Select Metric to Visualise",
+    metrics,
+    index=0
+)
+
 fig = px.bar(
     market_paid_channel_summary,
     x="Channel",
-    y="ROAS",
+    y=selected_metric,
     color="Market",
     barmode="group",
-    title="ROAS by Channel"
+    title=(f"{selected_metric} by Channel for {selected_markets}")
 )
 
 st.plotly_chart(fig, use_container_width=True)
+    
+    
