@@ -1,6 +1,7 @@
 import pandas as pd
 import numpy as np
 import plotly.express as px
+import streamlit as st
 
 df = pd.read_csv("Fospha Data 2.csv", sep=";")
 
