@@ -83,14 +83,18 @@ fig = px.bar(
 
 st.plotly_chart(fig, use_container_width=True)
     
-    
+selected_other_metric = st.selectbox(
+    "Select Metric to Visualise",
+    other_metric,
+    index=0
+)
 fig2 = px.bar(
     market_other_channel_summary,
     x="Channel",
-    y=other_metrics,
+    y=selected_other_metric,
     color="Market",
     barmode="group",
-    title=(f"{other_metrics} by Channel and Market")
+    title=(f"{selected_other_metric} by Channel and Market")
 )
 
 st.plotly_chart(fig2, use_container_width=True)
