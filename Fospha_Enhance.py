@@ -45,7 +45,7 @@ def build_summary(df, groupby_col):
 # Market Channel Summary
 market_channel_summary = build_summary(df, ["Market", "Channel"])
 markets = sorted(market_channel_summary["Market"].unique())
-selected_markets = st.multi_select(
+selected_markets = st.multiselect(
   "Select Market(s)",
   markets,
   default=markets
