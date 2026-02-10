@@ -73,37 +73,37 @@ other_metrics = ["Conversions", "New Conversions", "Return Conversions", "Revenu
 
 st.subheader("Metrics by Paid Channel")
 
-    selected_metric = st.selectbox(
-        "Select Metric to Visualise",
-        metrics,
-        index=0
-    )
-    
-    fig = px.bar(
-        market_paid_channel_summary,
-        x="Channel",
-        y=selected_metric,
-        color="Market",
-        barmode="group",
-        title=(f"{selected_metric} by Channel and Market")
-    )
-    
-    st.plotly_chart(fig, use_container_width=True)
+selected_metric = st.selectbox(
+    "Select Metric to Visualise",
+    metrics,
+    index=0
+)
+
+fig = px.bar(
+    market_paid_channel_summary,
+    x="Channel",
+    y=selected_metric,
+    color="Market",
+    barmode="group",
+    title=(f"{selected_metric} by Channel and Market")
+)
+
+st.plotly_chart(fig, use_container_width=True)
 
 st.subheader("Metrics by Owned/Earned Channels")
 
-    selected_other_metric = st.selectbox(
-        "Select Metric to Visualise",
-        other_metrics,
-        index=0
-    )
-    fig2 = px.bar(
-        market_other_channel_summary,
-        x="Channel",
-        y=selected_other_metric,
-        color="Market",
-        barmode="group",
-        title=(f"{selected_other_metric} by Channel and Market")
-    )
-    
-    st.plotly_chart(fig2, use_container_width=True)
+selected_other_metric = st.selectbox(
+    "Select Metric to Visualise",
+    other_metrics,
+    index=0
+)
+fig2 = px.bar(
+    market_other_channel_summary,
+    x="Channel",
+    y=selected_other_metric,
+    color="Market",
+    barmode="group",
+    title=(f"{selected_other_metric} by Channel and Market")
+)
+
+st.plotly_chart(fig2, use_container_width=True)
