@@ -84,3 +84,13 @@ fig = px.bar(
 st.plotly_chart(fig, use_container_width=True)
     
     
+fig2 = px.bar(
+    market_other_channel_summary,
+    x="Channel",
+    y=other_metrics,
+    color="Market",
+    barmode="group",
+    title=(f"{other_metrics} by Channel and Market")
+)
+
+st.plotly_chart(fig2, use_container_width=True)
