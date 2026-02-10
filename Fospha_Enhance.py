@@ -85,7 +85,7 @@ st.plotly_chart(fig, use_container_width=True)
     
 selected_other_metric = st.selectbox(
     "Select Metric to Visualise",
-    other_metric,
+    other_metrics,
     index=0
 )
 fig2 = px.bar(
