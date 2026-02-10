@@ -34,7 +34,19 @@ filtered_df = df[
     (df["Market"].isin(selected_markets)) &
     (df["Date_Year_Month"].isin(selected_date))
 ]
-
+# ------------------
+# Tabs
+# ------------------
+tab1, tab2, tab3, tab4, tab5, tab6, tab7 = st.tabs([
+    "Executive Overview",
+    "Channel Performance",
+    "Market View",
+    "Efficiency & Unit Economics",
+    "Acquisition Quality",
+    "Trends & Momentum",
+    "Deep Diving"
+    
+])
 # Build summary engine
 def build_summary(df, groupby_col):
     summary = (df.groupby(groupby_col).agg(
@@ -61,6 +73,8 @@ def build_summary(df, groupby_col):
                   )
     return summary
 
+# Monthly summary
+monthly_summary = build_summary(df, ["Date_Year_Month"])
 # Market / Paid Channel Summary
 market_channel_summary = build_summary(filtered_df, ["Market", "Channel"])
 paid_channels = ["Paid Search - Generic", "Paid Shopping", "Paid Social", "Performance Max"]
@@ -70,40 +84,49 @@ market_other_channel_summary = market_channel_summary[market_channel_summary["Ch
 
 metrics = ["ROAS", "CAC", "CPP", "AOV", "Conversions", "New Conversions", "Return Conversions", "Revenue", "Cost", "Total Visits"]
 other_metrics = ["Conversions", "New Conversions", "Return Conversions", "Revenue", "Total Visits"]
+with tab1:
+    st.header("Top Line Metrics")
+    kpi1, kpi2, kpi3, kpi4 = st.columns(4)
+    kpi1.metric("Total Cost (£)", f"{monthly_summary['Total_Cost'].sum():,.0f}")
+    kpi2.metric("Total Revenue (£)", f"{monthly_summary['Total_Revenue'].sum():,.0f}")
+    kpi3.metric("ROAS", f"{monthly_summary['Total_Revenue'].sum() / monthly_summary['Total_Cost'].sum():.2f}")
+    kpi4.metric("CAC (£)", f"{monthly_summary['Total_Cost'].sum() / monthly_summary['Total_New_Conv'].sum():.2f}")
 
-st.subheader("Metrics by Paid Channel")
 
-selected_metric = st.selectbox(
-    "Select Metric to Visualise",
-    metrics,
-    index=0
-)
-
-fig = px.bar(
-    market_paid_channel_summary,
-    x="Channel",
-    y=selected_metric,
-    color="Market",
-    barmode="group",
-    title=(f"{selected_metric} by Channel and Market")
-)
-
-st.plotly_chart(fig, use_container_width=True)
-
-st.subheader("Metrics by Owned/Earned Channels")
-
-selected_other_metric = st.selectbox(
-    "Select Metric to Visualise",
-    other_metrics,
-    index=0
-)
-fig2 = px.bar(
-    market_other_channel_summary,
-    x="Channel",
-    y=selected_other_metric,
-    color="Market",
-    barmode="group",
-    title=(f"{selected_other_metric} by Channel and Market")
-)
-
-st.plotly_chart(fig2, use_container_width=True)
+with tab2:
+    st.subheader("Metrics by Paid Channel")
+    
+    selected_metric = st.selectbox(
+        "Select Metric to Visualise",
+        metrics,
+        index=0
+    )
+    
+    fig = px.bar(
+        market_paid_channel_summary,
+        x="Channel",
+        y=selected_metric,
+        color="Market",
+        barmode="group",
+        title=(f"{selected_metric} by Channel and Market")
+    )
+    
+    st.plotly_chart(fig, use_container_width=True)
+    
+    st.subheader("Metrics by Owned/Earned Channels")
+    
+    selected_other_metric = st.selectbox(
+        "Select Metric to Visualise",
+        other_metrics,
+        index=0
+    )
+    fig2 = px.bar(
+        market_other_channel_summary,
+        x="Channel",
+        y=selected_other_metric,
+        color="Market",
+        barmode="group",
+        title=(f"{selected_other_metric} by Channel and Market")
+    )
+    
+    st.plotly_chart(fig2, use_container_width=True)
