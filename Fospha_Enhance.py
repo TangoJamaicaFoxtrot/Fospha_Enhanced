@@ -64,7 +64,7 @@ market_paid_channel_summary = market_channel_summary[market_channel_summary["Cha
 market_other_channel_summary = market_channel_summary[market_channel_summary["Channel"].isin(other_channels)]
 
 metrics = ["ROAS", "CAC", "CPP", "AOV", "Conversions", "New_Conversions", "Return_Conversions", "Revenue", "Cost", "Total_Visits"]
-other_metrics = ["Conversions", "New_Conversions", "Return_Conversions", "Revenue", "Cost", "Total_Visits"]
+other_metrics = ["Conversions", "New_Conversions", "Return_Conversions", "Revenue", "Total_Visits"]
 
 selected_metric = st.selectbox(
     "Select Metric to Visualise",
