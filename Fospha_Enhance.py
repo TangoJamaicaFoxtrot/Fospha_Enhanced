@@ -53,7 +53,12 @@ def build_summary(df, groupby_col):
     summary_num_cols = ["Total_Visits", "Cost", "Conversions", "Revenue", "New_Conversions"]
     for col in summary_num_cols:
         summary[summary_num_cols] = summary[summary_num_cols].round(2)
-    
+    summary.rename(columns={
+        "Total_Visits":"Total Visits",
+        "New_Conversions": "New Conversions",
+        "Return_Conversions":"Return Conversions"
+    }, inplace=True
+                  )
     return summary
 
 # Market / Paid Channel Summary
