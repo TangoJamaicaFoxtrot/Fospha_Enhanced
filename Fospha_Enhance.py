@@ -87,10 +87,10 @@ other_metrics = ["Conversions", "New Conversions", "Return Conversions", "Revenu
 with tab1:
     st.header("Top Line Metrics")
     kpi1, kpi2, kpi3, kpi4 = st.columns(4)
-    kpi1.metric("Total Cost (£)", f"{monthly_summary['Total_Cost'].sum():,.0f}")
-    kpi2.metric("Total Revenue (£)", f"{monthly_summary['Total_Revenue'].sum():,.0f}")
-    kpi3.metric("ROAS", f"{monthly_summary['Total_Revenue'].sum() / monthly_summary['Total_Cost'].sum():.2f}")
-    kpi4.metric("CAC (£)", f"{monthly_summary['Total_Cost'].sum() / monthly_summary['Total_New_Conv'].sum():.2f}")
+    kpi1.metric("Total Cost (£)", f"{monthly_summary['Cost'].sum():,.0f}")
+    kpi2.metric("Total Revenue (£)", f"{monthly_summary['Revenue'].sum():,.0f}")
+    kpi3.metric("ROAS", f"{monthly_summary['Revenue'].sum() / monthly_summary['ost'].sum():.2f}")
+    kpi4.metric("CAC (£)", f"{monthly_summary['Cost'].sum() / monthly_summary['New Conversions'].sum():.2f}")
 
 
 with tab2:
