@@ -25,16 +25,13 @@ for col in df_num_cols:
 st.sidebar.header("Filters")
 
 markets = sorted(df["Market"].dropna().unique())
-channels = sorted(df["Channel"].dropna().unique())
 months = sorted(df["Date_Year_Month"].dropna().unique())
 
 selected_markets = st.sidebar.multiselect("Market", markets, default=markets)
-selected_channels = st.sidebar.multiselect("Channel", channels, default=channels)
 selected_date = st.sidebar.multiselect("Date", months, default=months)
 
 filtered_df = df[
     (df["Market"].isin(selected_markets)) &
-    (df["Channel"].isin(selected_channels)) &
     (df["Date_Year_Month"].isin(selected_date))
 ]
 
@@ -59,11 +56,13 @@ def build_summary(df, groupby_col):
     
     return summary
 
-# Market Channel Summary
+# Market / Paid Channel Summary
 market_channel_summary = build_summary(filtered_df, ["Market", "Channel"])
+paid_channels = ["Paid Search - Generic", "Paid Shopping", "Paid Social", "Performance Max"]
+market_paid_channel_summary = market_channel_summary[market_channel_summary["Channel"].isin(paid_channels)]
 
 fig = px.bar(
-    market_channel_summary,
+    market_paid_channel_summary,
     x="Channel",
     y="ROAS",
     color="Market",
