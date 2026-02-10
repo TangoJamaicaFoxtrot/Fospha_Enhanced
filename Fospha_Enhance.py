@@ -21,6 +21,23 @@ df_num_cols = ["Cost", "Fospha Attribution Conversions", "Fospha Attribution Rev
 for col in df_num_cols:
     df[col] = pd.to_numeric(df[col], errors="coerce")
 
+
+st.sidebar.header("Filters")
+
+markets = sorted(df["Market"].dropna().unique())
+channels = sorted(df["Channel"].dropna().unique())
+months = sorted(df["Date_Year_Month"].dropna().unique())
+
+selected_markets = st.sidebar.multiselect("Market", markets, default=markets)
+selected_channels = st.sidebar.multiselect("Channel", channels, default=channels)
+selected_date = st.sidebar.multiselect("Date", months, default=months)
+
+filtered_df = df[
+    (df["Market"].isin(selected_markets)) &
+    (df["Channel"].isin(selected_channels)) &
+    (df["Date_Year_Month"].isin(selected_date))
+]
+
 # Build summary engine
 def build_summary(df, groupby_col):
     summary = (df.groupby(groupby_col).agg(
@@ -43,18 +60,10 @@ def build_summary(df, groupby_col):
     return summary
 
 # Market Channel Summary
-market_channel_summary = build_summary(df, ["Market", "Channel"])
-markets = sorted(market_channel_summary["Market"].unique())
-selected_markets = st.multiselect(
-  "Select Market(s)",
-  markets,
-  default=markets
-)
-
-filtered_market = market_channel_summary[market_channel_summary["Market"].isin(selected_markets)]
+market_channel_summary = build_summary(filtered_df, ["Market", "Channel"])
 
 fig = px.bar(
-    filtered_market,
+    market_channel_summary,
     x="Channel",
     y="ROAS",
     color="Market",
