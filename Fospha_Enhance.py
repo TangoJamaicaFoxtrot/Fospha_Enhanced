@@ -140,8 +140,8 @@ with tab3:
         color="Market"
     )
     revenue_market_trend_fig.update_layout(
-        xaxis="Date",
-        title= "Trend of Revenue over Time by Market"
+        xaxis_title="Date",
+        title = "Trend of Revenue over Time by Market"
     )
     st.plotly_chart(revenue_market_trend_fig, use_container_width=True)
     
