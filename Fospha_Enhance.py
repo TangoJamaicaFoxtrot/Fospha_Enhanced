@@ -139,7 +139,7 @@ with tab3:
         y="Revenue",
         color="Market"
     )
-    revenue_market_trrend_fig.update_layout(
+    revenue_market_trend_fig.update_layout(
         xaxis="Date",
         title= "Trend of Revenue over Time by Market"
     )
